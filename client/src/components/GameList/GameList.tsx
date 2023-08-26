@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './GameList.module.scss';
 import { Heading } from '@chakra-ui/react';
 import GameCard from '../GameCard/GameCard';
 import { gameAPI } from '../../services/GameService';
+import GameFilter from '../GameFilter/GameFilter';
+import { TFetchGamesParams } from '../../types/TFetchGamesParams';
+import GameSorter from '../GameSorter/GameSorter';
 
 const GameList = () => {
-    const { data: games } = gameAPI.useFetchLiveGamesListQuery(undefined);
+    const [params, setParams] = useState<TFetchGamesParams>({});
+    const { data: games, refetch } = gameAPI.useFetchGamesQuery(params);
+
+    useEffect(() => {
+        refetch();
+    }, [params]);
 
     return (
         <main className={styles.list_container}>
             <aside className={styles.list_controllers}>
-                <div className={styles.controllers_filters}>Filters</div>
-                <div className={styles.controllers_sorters}>Sort</div>
+                <Heading
+                    as='h2'
+                    fontFamily='Poppins, sans-serif'
+                    fontSize='20px'
+                    fontWeight='600'
+                >
+                    Фильтры
+                </Heading>
+                <GameFilter setParams={setParams} />
+                <Heading
+                    as='h2'
+                    fontFamily='Poppins, sans-serif'
+                    fontSize='20px'
+                    fontWeight='600'
+                >
+                    Сортировка
+                </Heading>
+                <GameSorter setParams={setParams} />
             </aside>
             <section className={styles.list_contents}>
                 <Heading

@@ -9,7 +9,7 @@ import ScreenshotCarousel from '../ScreenshotCarousel/ScreenshotCarousel';
 const GamePage = () => {
     const navigate = useNavigate();
     const gameID = useParams().id;
-    const { data: details } = gameAPI.useFetchGameDetailsQuery(gameID!);
+    const { data: details } = gameAPI.useFetchGameDetailsQuery({ id: gameID! });
 
     const handleClick = () => {
         navigate(`/`);

@@ -1,5 +1,5 @@
 export enum Platforms {
-    'pc',
-    'browser',
-    'all',
+    'pc' = 'pc',
+    'browser' = 'browser',
+    'all' = 'all',
 }
