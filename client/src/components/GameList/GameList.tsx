@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styles from './GameList.module.scss';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Text } from '@chakra-ui/react';
 import GameCard from '../GameCard/GameCard';
 import { gameAPI } from '../../services/GameService';
 import GameFilter from '../GameFilter/GameFilter';
 import { TFetchGamesParams } from '../../types/TFetchGamesParams';
 import GameSorter from '../GameSorter/GameSorter';
+import Loader from '../Loader/Loader';
 
 const GameList = () => {
     const [params, setParams] = useState<TFetchGamesParams>({});
-    const { data: games, refetch } = gameAPI.useFetchGamesQuery(params);
+    const {
+        data: games,
+        refetch,
+        error,
+        isLoading,
+    } = gameAPI.useFetchGamesQuery(params);
 
     useEffect(() => {
         refetch();
@@ -47,6 +53,10 @@ const GameList = () => {
                     Список игр
                 </Heading>
                 <div className={styles.list_cards}>
+                    {isLoading && <Loader />}
+                    {error && (
+                        <Text color='red'>Произошла ошибка при загрузке</Text>
+                    )}
                     {games &&
                         games.map((game) => (
                             <GameCard

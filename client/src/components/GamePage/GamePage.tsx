@@ -2,14 +2,28 @@ import React from 'react';
 import styles from './GamePage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Button, Heading, Table, Tr, Th, Td, Tbody } from '@chakra-ui/react';
+import {
+    Button,
+    Heading,
+    Table,
+    Tr,
+    Th,
+    Td,
+    Tbody,
+    Text,
+} from '@chakra-ui/react';
 import { gameAPI } from '../../services/GameService';
 import ScreenshotCarousel from '../ScreenshotCarousel/ScreenshotCarousel';
+import Loader from '../Loader/Loader';
 
 const GamePage = () => {
     const navigate = useNavigate();
     const gameID = useParams().id;
-    const { data: details } = gameAPI.useFetchGameDetailsQuery({ id: gameID! });
+    const {
+        data: details,
+        error,
+        isLoading,
+    } = gameAPI.useFetchGameDetailsQuery({ id: gameID! });
 
     const handleClick = () => {
         navigate(`/`);
@@ -17,6 +31,8 @@ const GamePage = () => {
 
     return (
         <main className={styles.game_container}>
+            {isLoading && <Loader />}
+            {error && <Text color='red'>Произошла ошибка при загрузке</Text>}
             {details && (
                 <>
                     <aside className={styles.side_panel}>
