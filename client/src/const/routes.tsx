@@ -9,7 +9,8 @@ export const useRoutes = () => {
         <div>
             <Header></Header>
             <Routes>
-                <Route                    path='/'
+                <Route
+                    path='/'
                     element={<GameList />}
                 />
                 <Route
