@@ -43,10 +43,10 @@ const GameFilter = ({ setParams }: TGameFilter) => {
             }));
         } else {
             setSelectedGenre('all');
-            // delete "category" parameter from request parameters
             setParams((prevState) => {
-                const { category, ...otherParams } = prevState;
-                return otherParams;
+                const updatedParams = { ...prevState };
+                delete updatedParams['category'];
+                return updatedParams;
             });
         }
     };
