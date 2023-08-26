@@ -1,6 +1,6 @@
 export enum Sorts {
-    'release-data',
-    'popularity',
-    'alphabetical',
-    'relevance',
+    'release-data' = 'release-data',
+    'popularity' = 'popularity',
+    'alphabetical' = 'alphabetical',
+    'relevance' = 'relevance',
 }
