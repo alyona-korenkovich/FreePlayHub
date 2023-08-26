@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { TGame } from '../types/TGame';
 import { API_URL } from '../config/const';
+import { TFetchGamesParams } from '../types/TFetchGamesParams';
+import { TFetchGameParams } from '../types/TFetchGameParams';
 
 export const gameAPI = createApi({
     reducerPath: 'gameAPI',
@@ -8,9 +10,10 @@ export const gameAPI = createApi({
         baseUrl: API_URL,
     }),
     endpoints: (build) => ({
-        fetchLiveGamesList: build.query<TGame[], undefined>({
-            query: () => ({
-                url: `/games`,
+        fetchGames: build.query<TGame[], TFetchGamesParams>({
+            query: (params: TFetchGamesParams) => ({
+                url: '/games',
+                params: params,
                 headers: {
                     'X-RapidAPI-Key': process.env.REACT_APP_X_RAPIDAPI_KEY,
                     'X-RapidAPI-Host':
@@ -18,12 +21,10 @@ export const gameAPI = createApi({
                 },
             }),
         }),
-        fetchGameDetails: build.query<TGame, string>({
-            query: (id: string) => ({
+        fetchGameDetails: build.query<TGame, TFetchGameParams>({
+            query: (params: TFetchGameParams) => ({
                 url: '/game',
-                params: {
-                    id: id,
-                },
+                params: params,
                 headers: {
                     'X-RapidAPI-Key': process.env.REACT_APP_X_RAPIDAPI_KEY,
                     'X-RapidAPI-Host':
