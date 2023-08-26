@@ -62,20 +62,5 @@
         "husky": "^8.0.3",
         "prettier": "^3.0.2",
         "sass": "^1.66.1"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.ts": [
-            "npm run lint:fix",
-            "npm run format:fix"
-        ],
-        "*.tsx": [
-            "npm run lint:fix",
-            "npm run format:fix"
-        ]
     }
 }
