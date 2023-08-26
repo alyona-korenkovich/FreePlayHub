@@ -30,7 +30,7 @@ const GameSorter = ({ setParams }: TGameFilter) => {
         <>
             <section className='sort'>
                 <Select
-                    placeholder={selectedSort.toString()}
+                    value={selectedSort}
                     onChange={handleSortChange}
                 >
                     {sorts.map((option) => (

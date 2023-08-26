@@ -56,7 +56,7 @@ const GameFilter = ({ setParams }: TGameFilter) => {
             <section className='filter_platforms'>
                 <FormLabel>Платформы:</FormLabel>
                 <Select
-                    placeholder={selectedPlatform.toString()}
+                    value={selectedPlatform}
                     onChange={handlePlatformChange}
                 >
                     {platforms.map((option) => (
@@ -72,7 +72,7 @@ const GameFilter = ({ setParams }: TGameFilter) => {
             <section className='filter_genres'>
                 <FormLabel>Жанры</FormLabel>
                 <Select
-                    placeholder={selectedGenre.toString()}
+                    value={selectedGenre}
                     onChange={handleGenreChange}
                 >
                     <option
