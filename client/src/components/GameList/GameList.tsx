@@ -7,9 +7,9 @@ import GameFilter from '../GameFilter/GameFilter';
 import { TFetchGamesParams } from '../../types/TFetchGamesParams';
 import GameSorter from '../GameSorter/GameSorter';
 import Loader from '../Loader/Loader';
-
 const GameList = () => {
     const [params, setParams] = useState<TFetchGamesParams>({});
+
     const {
         data: games,
         refetch,
