@@ -1,26 +1,23 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { gameAPI } from '../../services/GameService';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { gamesCacheSlice } from '../../store/reducers/GamesCacheSlice';
 import { CACHE_INVALIDATION_TIME_IN_MS } from '../../config/const';
 import GameDetails from '../GameDetails/GameDetails';
 import { TGameDetails } from '../../types/TGameDetails';
 
 const GamePage = () => {
-    const dispatch = useAppDispatch();
     const gameID = useParams().id || '0';
 
-    const cachedGame = useAppSelector(
-        (state) => state.gamesCache.cachedGames[gameID],
-    );
+    const cachedGameLocalStorageKey = `cachedGame_${gameID}`;
+    const cachedGameJSON = localStorage.getItem(cachedGameLocalStorageKey);
+    const cachedGame = cachedGameJSON ? JSON.parse(cachedGameJSON) : null;
 
     const cacheIsValid =
         cachedGame &&
         Date.now() - cachedGame.timestamp <= CACHE_INVALIDATION_TIME_IN_MS;
 
-    if (!cacheIsValid) {
-        dispatch(gamesCacheSlice.actions.removeGameFromCache(gameID));
+    if (cachedGame && !cacheIsValid) {
+        localStorage.removeItem(cachedGameLocalStorageKey);
     }
 
     const {
@@ -34,9 +31,15 @@ const GamePage = () => {
 
     useEffect(() => {
         if (details) {
-            dispatch(gamesCacheSlice.actions.cacheGame(details));
+            localStorage.setItem(
+                cachedGameLocalStorageKey,
+                JSON.stringify({
+                    timestamp: Date.now(),
+                    gameDetails: details,
+                }),
+            );
         }
-    }, [details]);
+    }, [details, cachedGameLocalStorageKey]);
 
     const config: TGameDetails = {
         isLoading: cacheIsValid ? false : isLoading,
