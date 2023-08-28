@@ -24,24 +24,28 @@ const GameList = () => {
     return (
         <main className={styles.list_container}>
             <aside className={styles.list_controllers}>
-                <Heading
-                    as='h2'
-                    fontFamily='Poppins, sans-serif'
-                    fontSize='20px'
-                    fontWeight='600'
-                >
-                    Фильтры
-                </Heading>
-                <GameFilter setParams={setParams} />
-                <Heading
-                    as='h2'
-                    fontFamily='Poppins, sans-serif'
-                    fontSize='20px'
-                    fontWeight='600'
-                >
-                    Сортировка
-                </Heading>
-                <GameSorter setParams={setParams} />
+                <div className={styles.controllers_filters}>
+                    <Heading
+                        as='h2'
+                        fontFamily='Poppins, sans-serif'
+                        fontSize='20px'
+                        fontWeight='600'
+                    >
+                        Фильтры
+                    </Heading>
+                    <GameFilter setParams={setParams} />
+                </div>
+                <div className={styles.controllers_sorters}>
+                    <Heading
+                        as='h2'
+                        fontFamily='Poppins, sans-serif'
+                        fontSize='20px'
+                        fontWeight='600'
+                    >
+                        Сортировка
+                    </Heading>
+                    <GameSorter setParams={setParams} />
+                </div>
             </aside>
             <section className={styles.list_contents}>
                 <Heading
