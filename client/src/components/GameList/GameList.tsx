@@ -9,6 +9,7 @@ import GameSorter from '../GameSorter/GameSorter';
 import Loader from '../Loader/Loader';
 const GameList = () => {
     const [params, setParams] = useState<TFetchGamesParams>({});
+    const [noResults, setNoResults] = useState<boolean>(false);
 
     const {
         data: games,
@@ -20,6 +21,14 @@ const GameList = () => {
     useEffect(() => {
         refetch();
     }, [params]);
+
+    useEffect(() => {
+        if (games && Array.isArray(games)) {
+            setNoResults(false);
+        } else if (games && typeof games === 'object' && games.status === 0) {
+            setNoResults(true);
+        }
+    }, [games]);
 
     return (
         <main className={styles.list_container}>
@@ -58,10 +67,13 @@ const GameList = () => {
                 </Heading>
                 <div className={styles.list_cards}>
                     {isLoading && <Loader />}
-                    {error && (
-                        <Text color='red'>Произошла ошибка при загрузке</Text>
+                    {(error || noResults) && (
+                        <Text color='red'>
+                            Произошла ошибка при загрузке данных
+                        </Text>
                     )}
                     {games &&
+                        Array.isArray(games) &&
                         games.map((game) => (
                             <GameCard
                                 key={game.id}
