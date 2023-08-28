@@ -1,4 +1,5 @@
 .card_container {
+  cursor: pointer;
   display: flex;
   padding: 16px;
   align-items: flex-start;
@@ -34,4 +35,20 @@
 .card_release_date {
   display: flex;
   flex-direction: row;
+  gap: 2px;
+}
+
+@media (max-width: 800px) {
+  .card_header {
+    align-items: start;
+  }
+
+  .card_container {
+    padding: 8px;
+    gap: 12px;
+  }
+  .card_release_date {
+    flex-direction: column;
+    text-align: end;
+  }
 }

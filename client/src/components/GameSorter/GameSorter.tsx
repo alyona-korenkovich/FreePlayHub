@@ -30,6 +30,7 @@ const GameSorter = ({ setParams }: TGameFilter) => {
         <>
             <section className='sort'>
                 <Select
+                    cursor='pointer'
                     value={selectedSort}
                     onChange={handleSortChange}
                 >

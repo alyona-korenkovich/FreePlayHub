@@ -45,7 +45,7 @@ const GameCard = ({
                             fontSize='14px'
                             fontWeight='400'
                         >
-                            дата выхода:
+                            дата&nbsp;выхода:
                         </Text>
                         <Text
                             colorScheme='grey'

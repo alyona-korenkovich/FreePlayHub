@@ -5,12 +5,25 @@
   gap: 54px;
   flex: 1 0 0;
   align-self: stretch;
+
+  max-width: 1200px;
+  margin: auto;
 }
 
 .list_controllers {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.controllers_filters, .controllers_sorters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  section {
+    gap: 8px;
+  }
 }
 
 .list_contents {
@@ -29,4 +42,30 @@
   gap: 16px;
   flex: 1 0 0;
   align-self: stretch;
+}
+
+@media (max-width: 800px) {
+  .list_container {
+    padding: 8px;
+    gap: 40px;
+    flex-direction: column;
+  }
+
+  .list_controllers {
+    width: 100%;
+    align-items: center;
+  }
+
+  .controllers_filters, .controllers_sorters {
+    flex-direction: row;
+    width: 100%;
+
+    h2 {
+      display: none;
+    }
+
+    section {
+      gap: 4px;
+    }
+  }
 }

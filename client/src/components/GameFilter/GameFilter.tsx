@@ -54,8 +54,9 @@ const GameFilter = ({ setParams }: TGameFilter) => {
     return (
         <>
             <section className='filter_platforms'>
-                <FormLabel>Платформы:</FormLabel>
+                <FormLabel>Платформы</FormLabel>
                 <Select
+                    cursor='pointer'
                     value={selectedPlatform}
                     onChange={handlePlatformChange}
                 >
@@ -72,6 +73,7 @@ const GameFilter = ({ setParams }: TGameFilter) => {
             <section className='filter_genres'>
                 <FormLabel>Жанры</FormLabel>
                 <Select
+                    cursor='pointer'
                     value={selectedGenre}
                     onChange={handleGenreChange}
                 >
