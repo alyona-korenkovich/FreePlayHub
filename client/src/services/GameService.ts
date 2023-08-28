@@ -4,13 +4,18 @@ import { API_URL } from '../config/const';
 import { TFetchGamesParams } from '../types/TFetchGamesParams';
 import { TFetchGameParams } from '../types/TFetchGameParams';
 
+type TNoResults = {
+    status: number;
+    status_message: string;
+};
+
 export const gameAPI = createApi({
     reducerPath: 'gameAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: API_URL,
     }),
     endpoints: (build) => ({
-        fetchGames: build.query<TGame[], TFetchGamesParams>({
+        fetchGames: build.query<TGame[] | TNoResults, TFetchGamesParams>({
             query: (params: TFetchGamesParams) => ({
                 url: '/games',
                 params: params,
