@@ -1,0 +1,15 @@
+{
+    "files": {
+        "main.css": "/FreePlayHub/static/css/main.e37fa821.css",
+        "main.js": "/FreePlayHub/static/js/main.734be111.js",
+        "static/js/787.c4e7f8f9.chunk.js": "/FreePlayHub/static/js/787.c4e7f8f9.chunk.js",
+        "index.html": "/FreePlayHub/index.html",
+        "main.e37fa821.css.map": "/FreePlayHub/static/css/main.e37fa821.css.map",
+        "main.734be111.js.map": "/FreePlayHub/static/js/main.734be111.js.map",
+        "787.c4e7f8f9.chunk.js.map": "/FreePlayHub/static/js/787.c4e7f8f9.chunk.js.map"
+    },
+    "entrypoints": [
+        "static/css/main.e37fa821.css",
+        "static/js/main.734be111.js"
+    ]
+}
