@@ -1,4 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import {
+    createApi,
+    fetchBaseQuery,
+    retry,
+} from '@reduxjs/toolkit/dist/query/react';
 import { TGame } from '../types/TGame';
 import { API_URL } from '../config/const';
 import { TFetchGamesParams } from '../types/TFetchGamesParams';
@@ -9,11 +13,13 @@ type TNoResults = {
     status_message: string;
 };
 
+const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: API_URL }), {
+    maxRetries: 3,
+});
+
 export const gameAPI = createApi({
     reducerPath: 'gameAPI',
-    baseQuery: fetchBaseQuery({
-        baseUrl: API_URL,
-    }),
+    baseQuery: staggeredBaseQuery,
     endpoints: (build) => ({
         fetchGames: build.query<TGame[] | TNoResults, TFetchGamesParams>({
             query: (params: TFetchGamesParams) => ({
