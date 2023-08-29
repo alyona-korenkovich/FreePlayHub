@@ -22,12 +22,13 @@ const GameCard = ({
     return (
         <div
             className={styles.card_container}
+            data-testid='card-container'
             onClick={handleClick}
         >
             <img
                 className={styles.card_thumbnail}
                 src={thumbnail}
-                alt=''
+                alt='Game thumbnail'
             />
             <div className={styles.card_details}>
                 <div className={styles.card_header}>
