@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import GameCard from '../components/GameCard/GameCard';
 import { MemoryRouter } from 'react-router-dom';
@@ -8,6 +8,8 @@ import GameDetails from '../components/GameDetails/GameDetails';
 import GameSorter from '../components/GameSorter/GameSorter';
 import GameFilter from '../components/GameFilter/GameFilter';
 import ScreenshotCarousel from '../components/ScreenshotCarousel/ScreenshotCarousel';
+import GameList from '../components/GameList/GameList';
+import { ReduxProvider } from '../providers/Redux.provider';
 
 describe('a11y tests for components', () => {
     test('GameCard component has no accessibility violations', async () => {
@@ -112,6 +114,21 @@ describe('a11y tests for components', () => {
         const { container } = render(
             <ScreenshotCarousel screenshots={screenshotsMock} />,
         );
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+    });
+
+    test('GameList has no accessibility violations', async () => {
+        const { container } = render(
+            <ReduxProvider>
+                <MemoryRouter>
+                    <GameList />
+                </MemoryRouter>
+            </ReduxProvider>,
+        );
+
+        await waitFor(() => screen.getAllByTestId('card-container')[0]);
+
         const results = await axe(container);
         expect(results).toHaveNoViolations();
     });
