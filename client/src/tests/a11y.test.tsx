@@ -5,6 +5,8 @@ import GameCard from '../components/GameCard/GameCard';
 import { MemoryRouter } from 'react-router-dom';
 import { TGameDetails } from '../types/TGameDetails';
 import GameDetails from '../components/GameDetails/GameDetails';
+import GameSorter from '../components/GameSorter/GameSorter';
+import GameFilter from '../components/GameFilter/GameFilter';
 
 describe('a11y tests for components', () => {
     test('GameCard component has no accessibility violations', async () => {
@@ -79,6 +81,22 @@ describe('a11y tests for components', () => {
             </MemoryRouter>,
         );
 
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+    });
+
+    test('GameFilter has no accessibility violations', async () => {
+        const setParamsMock = jest.fn();
+
+        const { container } = render(<GameFilter setParams={setParamsMock} />);
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+    });
+
+    test('GameSorter has no accessibility violations', async () => {
+        const setParamsMock = jest.fn();
+
+        const { container } = render(<GameSorter setParams={setParamsMock} />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
     });
