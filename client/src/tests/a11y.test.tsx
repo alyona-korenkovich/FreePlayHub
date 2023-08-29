@@ -7,6 +7,7 @@ import { TGameDetails } from '../types/TGameDetails';
 import GameDetails from '../components/GameDetails/GameDetails';
 import GameSorter from '../components/GameSorter/GameSorter';
 import GameFilter from '../components/GameFilter/GameFilter';
+import ScreenshotCarousel from '../components/ScreenshotCarousel/ScreenshotCarousel';
 
 describe('a11y tests for components', () => {
     test('GameCard component has no accessibility violations', async () => {
@@ -97,6 +98,20 @@ describe('a11y tests for components', () => {
         const setParamsMock = jest.fn();
 
         const { container } = render(<GameSorter setParams={setParamsMock} />);
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+    });
+
+    test('Screenshot carousel has no accessibility violations', async () => {
+        const screenshotsMock = [
+            { id: 1, image: 'image1.jpg' },
+            { id: 2, image: 'image2.jpg' },
+            { id: 3, image: 'image3.jpg' },
+        ];
+
+        const { container } = render(
+            <ScreenshotCarousel screenshots={screenshotsMock} />,
+        );
         const results = await axe(container);
         expect(results).toHaveNoViolations();
     });
