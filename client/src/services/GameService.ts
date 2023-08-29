@@ -7,11 +7,7 @@ import { TGame } from '../types/TGame';
 import { API_URL } from '../config/const';
 import { TFetchGamesParams } from '../types/TFetchGamesParams';
 import { TFetchGameParams } from '../types/TFetchGameParams';
-
-type TNoResults = {
-    status: number;
-    status_message: string;
-};
+import { TNoResults } from '../types/TNoResults';
 
 const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: API_URL }), {
     maxRetries: 3,
