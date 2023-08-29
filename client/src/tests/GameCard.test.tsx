@@ -29,7 +29,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('GameCard unit tests', () => {
     test('renders GameCard component correctly', () => {
-        const { asFragment } = render(
+        render(
             <MemoryRouter>
                 <GameCard {...mockGame} />
             </MemoryRouter>,
@@ -39,12 +39,13 @@ describe('GameCard unit tests', () => {
         const genreElement = screen.getByText('Test Genre');
         const publisherElement = screen.getByText('Test Publisher');
         const releaseDate = screen.getByText('29.08.2023');
+        const thumbnail = screen.getByAltText('Game thumbnail');
 
         expect(titleElement).toBeInTheDocument();
         expect(genreElement).toBeInTheDocument();
         expect(publisherElement).toBeInTheDocument();
         expect(releaseDate).toBeInTheDocument();
-        expect(asFragment()).toMatchImageSnapshot();
+        expect(thumbnail).toBeInTheDocument();
     });
 
     test('renders GameCard component without thumbnail', () => {
@@ -81,4 +82,4 @@ describe('GameCard unit tests', () => {
 
         expect(mockUseNavigate).toHaveBeenCalledWith('/game/1');
     });
-})
+});
