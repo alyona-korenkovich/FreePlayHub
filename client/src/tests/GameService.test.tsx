@@ -197,5 +197,5 @@ describe('gameAPI', () => {
 
         expect(result.current.data).toBeUndefined();
         expect(result.current.error).toEqual(noResult);
-    }, 10000);
+    });
 });

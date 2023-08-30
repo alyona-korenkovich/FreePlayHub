@@ -48,7 +48,6 @@ const MainPage = () => {
     };
 
     useEffect(() => {
-        console.log('params changed', params);
         setVisibleGames([]);
         refetch();
     }, [params]);
