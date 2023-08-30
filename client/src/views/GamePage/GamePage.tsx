@@ -29,16 +29,12 @@ const GamePage = () => {
 
     const abortCurrentPromise = () => {
         if (currentPromise) {
-            console.log('[ABORT]', currentPromise);
             currentPromise.abort();
         }
     };
 
     useEffect(() => {
-        console.log('update currentPromise', currentPromise);
-
         return () => {
-            console.log('clean up currentPromise', currentPromise);
             abortCurrentPromise();
         };
     }, [currentPromise]);
@@ -47,7 +43,6 @@ const GamePage = () => {
         if (!cacheIsValid) {
             const promise = fetchGameDetails({ id: gameID! });
             setCurrentPromise(promise);
-            console.log('[FETCH]', promise);
         }
     }, [gameID]);
 

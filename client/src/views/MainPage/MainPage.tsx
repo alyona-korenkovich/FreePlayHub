@@ -33,7 +33,6 @@ const MainPage = () => {
 
     const abortCurrentPromise = () => {
         if (currentPromise) {
-            console.log('[ABORT]', currentPromise);
             currentPromise.abort();
         }
     };
@@ -54,11 +53,7 @@ const MainPage = () => {
     }, [isLoading]);
 
     useEffect(() => {
-        console.log('update currentPromise', currentPromise);
-        // abortCurrentPromise();
-
         return () => {
-            console.log('clean up currentPromise', currentPromise);
             abortCurrentPromise();
         };
     }, [currentPromise]);
@@ -70,7 +65,6 @@ const MainPage = () => {
 
         const promise = fetchGames(params);
         setCurrentPromise(promise);
-        console.log('[FETCH]', promise);
     }, [params]);
 
     useEffect(() => {
