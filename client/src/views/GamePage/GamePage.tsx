@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { gameAPI } from '../../services/GameService';
 import { CACHE_INVALIDATION_TIME_IN_MS } from '../../config/const';
-import GameDetails from '../GameDetails/GameDetails';
+import GameDetails from '../../components/GameDetails/GameDetails';
 import { TGameDetails } from '../../types/TGameDetails';
 
 const GamePage = () => {

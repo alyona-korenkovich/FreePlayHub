@@ -15,6 +15,7 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 import ScreenshotCarousel from '../ScreenshotCarousel/ScreenshotCarousel';
 import { useNavigate } from 'react-router-dom';
 import { TGameDetails } from '../../types/TGameDetails';
+import { reformatDate } from '../../utils/reformatDate';
 
 const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
     const navigate = useNavigate();
@@ -27,7 +28,16 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
             <main className={styles.game_container}>
                 {isLoading && <Loader />}
                 {error && (
-                    <Text color='red'>Произошла ошибка при загрузке</Text>
+                    <>
+                        <Button
+                            width='100%'
+                            leftIcon={<ArrowBackIcon />}
+                            onClick={handleClick}
+                        >
+                            Назад к списку игр
+                        </Button>
+                        <Text color='red'>Произошла ошибка при загрузке</Text>
+                    </>
                 )}
                 {details && (
                     <>
@@ -66,7 +76,11 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                                     <Tbody maxWidth='50vw'>
                                         <Tr>
                                             <Th width='40%'>Дата выхода</Th>
-                                            <Td>{details!.release_date}</Td>
+                                            <Td>
+                                                {reformatDate(
+                                                    details!.release_date,
+                                                )}
+                                            </Td>
                                         </Tr>
                                         <Tr>
                                             <Th width='40%'>Жанр</Th>
@@ -74,11 +88,15 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                                         </Tr>
                                         <Tr>
                                             <Th width='40%'>Разработчик</Th>
-                                            <Td>{details!.developer}</Td>
+                                            <Td data-testid='developer'>
+                                                {details!.developer}
+                                            </Td>
                                         </Tr>
                                         <Tr>
                                             <Th width='40%'>Издатель</Th>
-                                            <Td>{details!.publisher}</Td>
+                                            <Td data-testid='publisher'>
+                                                {details!.publisher}
+                                            </Td>
                                         </Tr>
                                     </Tbody>
                                 </Table>

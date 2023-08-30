@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sorts } from '../../const/sorts';
 import { TFetchGamesParams } from '../../types/TFetchGamesParams';
 import { isValidSort } from '../../utils/isValidSort';
-import { Select } from '@chakra-ui/react';
+import { FormLabel, Select, VisuallyHidden } from '@chakra-ui/react';
 
 type TGameFilter = {
     setParams: React.Dispatch<React.SetStateAction<TFetchGamesParams>>;
@@ -29,7 +29,12 @@ const GameSorter = ({ setParams }: TGameFilter) => {
     return (
         <>
             <section className='sort'>
+                <FormLabel htmlFor='platformSelect'>
+                    <VisuallyHidden>Сортировка</VisuallyHidden>
+                </FormLabel>
                 <Select
+                    id='platformSelect'
+                    data-testid='games_sorter'
                     cursor='pointer'
                     value={selectedSort}
                     onChange={handleSortChange}

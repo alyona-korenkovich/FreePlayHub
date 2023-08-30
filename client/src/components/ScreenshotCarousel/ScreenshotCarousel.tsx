@@ -25,6 +25,7 @@ const ScreenshotCarousel = ({ screenshots }: TScreenshotCarousel) => {
                 ' ' +
                 (fullScreen ? styles.slideshow_container__fullscreen : '')
             }
+            data-testid='screenshot-carousel'
         >
             <button
                 className={
@@ -33,6 +34,7 @@ const ScreenshotCarousel = ({ screenshots }: TScreenshotCarousel) => {
                     (fullScreen ? styles.escFullScreen__active : '')
                 }
                 onClick={() => setFullScreen(false)}
+                aria-label='Escape fullscreen view'
             >
                 <CloseIcon />
             </button>
@@ -55,6 +57,7 @@ const ScreenshotCarousel = ({ screenshots }: TScreenshotCarousel) => {
                     onClick={() => {
                         changeSlide(currSlide - 1);
                     }}
+                    aria-label='Go to the previous slide'
                 >
                     <ArrowBackIcon />
                 </button>
@@ -63,6 +66,7 @@ const ScreenshotCarousel = ({ screenshots }: TScreenshotCarousel) => {
                     onClick={() => {
                         changeSlide(currSlide + 1);
                     }}
+                    aria-label='Go to the next slide'
                 >
                     <ArrowForwardIcon />
                 </button>

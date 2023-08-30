@@ -1,8 +1,8 @@
 import Header from '../components/Header/Header';
-import GameList from '../components/GameList/GameList';
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import GamePage from '../components/GamePage/GamePage';
+import GamePage from '../views/GamePage/GamePage';
+import MainPage from '../views/MainPage/MainPage';
 
 export const useRoutes = () => {
     return (
@@ -11,7 +11,7 @@ export const useRoutes = () => {
             <Routes>
                 <Route
                     path='/'
-                    element={<GameList />}
+                    element={<MainPage />}
                 />
                 <Route
                     path='/game/:id'
