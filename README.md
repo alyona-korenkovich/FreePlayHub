@@ -19,11 +19,21 @@
     ·
     <a href="https://github.com/alyona-korenkovich/FreePlayHub/issues?q=is%3Aissue+is%3Aclosed">Issues</a>
   </p>
+
+  <a href="https://github.com/alyona-korenkovich/FreePlayHub/actions/workflows/frontend.yml">
+    <img 
+      src="https://github.com/alyona-korenkovich/FreePlayHub/actions/workflows/frontend.yml/badge.svg"
+      alt="frontend-CI"
+    />
+  </a>
 </div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>
+
+  ## 🚀 Table of Contents
+  </summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#built-with">Built with</a></li>
@@ -39,7 +49,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
----
 <img src="img/about_project_img.png" alt="FreePlayHub - React 18, Redux, адаптивный дизайн, кэширование страниц, полноэкранная карусель скриншотов">
 
 This project is a clone of the FreeToGame store that provides free games. 
@@ -79,7 +88,6 @@ Also, the application implements caching of downloaded data with a lifetime of 5
 <!-- BUILT WITH -->
 ## Built with
 
----
 
 * ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 * ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
@@ -96,7 +104,6 @@ Also, the application implements caching of downloaded data with a lifetime of 5
 <!-- SHOWCASE -->
 ## Showcase
 
----
 
 See how pages look on desktop/mobile:
 
@@ -112,7 +119,6 @@ See how pages look on desktop/mobile:
 <!--GETTING STARTED -->
 ## Getting started
 
----
 
 ### Clone the project
 `git clone https://github.com/alyona-korenkovich/FreePlayHub`
@@ -134,7 +140,7 @@ It is needed to
 
 ### Start development server
 
-`npm run start`
+`npm start`
 
 ### Open `localhost:3001` on your browser
 ...and enjoy FreePlayHub!
@@ -144,7 +150,6 @@ It is needed to
 <!-- ROADMAP -->
 ## Roadmap
 
----
 
 - 🌟 Init GitHub project and start working 🌟
 ---
@@ -163,14 +168,14 @@ It is needed to
 ---
 - 🌟 First release and deployment to GitHub Pages 🌟
 ---
-- [ ] #6 Endless Scroller
+- [x] #6 Endless Scroller
   - Data lazy-loading and endless game list
-- [ ] #7 Try-3-Times requests
+- [x] #7 Try-3-Times requests
   - If the request is unsuccessful, there must be three attempts to re-request
-- [ ] #8 Cancel Requests
+- [x] #8 Cancel Requests
   - Cancel outdated requests when redirecting pages
-- [ ] #9 Testing
-  - Add unit, integration, e2e, screenshot tests
+- [x] #9 Testing
+  - Add unit tests
   - Add GitHub workflows and support GitHub Actions
 ---
 - 🌟 Second release 🌟
@@ -190,7 +195,6 @@ It is needed to
 <!-- LICENSE -->
 ## License
 
----
 
 Distributed under the MIT License. 
 
@@ -201,7 +205,6 @@ See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
----
 
 Alyona Korenkovich - tg: [@cri_decoeur](https://t.me/cri_decoeur) - al.korenkovich@mail.ru
 
@@ -212,7 +215,6 @@ Project Link: [github.com/alyona-korenkovich/FreePlayHub](https://github.com/aly
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
----
 
 Some helpful links:
 
