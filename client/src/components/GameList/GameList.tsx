@@ -63,7 +63,10 @@ const GameList = ({
                                 {...game}
                             />
                         ))}
-                    <div ref={endOfListRef} />
+                    <div
+                        data-testid={'End of list div'}
+                        ref={endOfListRef}
+                    />
                 </div>
             </section>
         </main>

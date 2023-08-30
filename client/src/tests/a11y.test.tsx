@@ -10,6 +10,8 @@ import GameFilter from '../components/GameFilter/GameFilter';
 import ScreenshotCarousel from '../components/ScreenshotCarousel/ScreenshotCarousel';
 import GameList from '../components/GameList/GameList';
 import { ReduxProvider } from '../providers/Redux.provider';
+import { TGameList } from '../types/TGameList';
+import { allGames } from './mocks';
 
 describe('a11y tests for components', () => {
     test('GameCard component has no accessibility violations', async () => {
@@ -119,10 +121,18 @@ describe('a11y tests for components', () => {
     });
 
     test('GameList has no accessibility violations', async () => {
+        const mockedGameListReady: TGameList = {
+            isLoading: false,
+            error: false,
+            games: allGames,
+            setParams: () => {},
+            endOfListRef: undefined,
+        };
+
         const { container } = render(
             <ReduxProvider>
                 <MemoryRouter>
-                    <GameList />
+                    <GameList {...mockedGameListReady} />
                 </MemoryRouter>
             </ReduxProvider>,
         );
