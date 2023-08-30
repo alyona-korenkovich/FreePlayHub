@@ -101,72 +101,76 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                                     </Tbody>
                                 </Table>
                             </section>
-                            <section>
-                                <Heading
-                                    as='h2'
-                                    fontFamily='Poppins, sans-serif'
-                                    fontSize='24px'
-                                    fontWeight='600'
-                                >
-                                    Системные требования
-                                </Heading>
-                                <Table>
-                                    <Tbody maxWidth='50vw'>
-                                        <Tr>
-                                            <Th width='40%'>
-                                                Операционная система
-                                            </Th>
-                                            <Td>
-                                                {
-                                                    details!
-                                                        .minimum_system_requirements!
-                                                        .os
-                                                }
-                                            </Td>
-                                        </Tr>
-                                        <Tr>
-                                            <Th width='40%'>Процессор</Th>
-                                            <Td>
-                                                {
-                                                    details!
-                                                        .minimum_system_requirements!
-                                                        .processor
-                                                }
-                                            </Td>
-                                        </Tr>
-                                        <Tr>
-                                            <Th width='40%'>Память</Th>
-                                            <Td>
-                                                {
-                                                    details!
-                                                        .minimum_system_requirements!
-                                                        .memory
-                                                }
-                                            </Td>
-                                        </Tr>
-                                        <Tr>
-                                            <Th width='40%'>Видеокарта</Th>
-                                            <Td>
-                                                {
-                                                    details!
-                                                        .minimum_system_requirements!
-                                                        .graphics
-                                                }
-                                            </Td>
-                                        </Tr>
-                                        <Tr>
-                                            <Th width='40%'>Место на диске</Th>
-                                            <Td>
-                                                {
-                                                    details!
-                                                        .minimum_system_requirements!
-                                                        .storage
-                                                }
-                                            </Td>
-                                        </Tr>
-                                    </Tbody>
-                                </Table>
-                            </section>
+                            {details!.minimum_system_requirements && (
+                                <section>
+                                    <Heading
+                                        as='h2'
+                                        fontFamily='Poppins, sans-serif'
+                                        fontSize='24px'
+                                        fontWeight='600'
+                                    >
+                                        Системные требования
+                                    </Heading>
+                                    <Table>
+                                        <Tbody maxWidth='50vw'>
+                                            <Tr>
+                                                <Th width='40%'>
+                                                    Операционная система
+                                                </Th>
+                                                <Td>
+                                                    {
+                                                        details!
+                                                            .minimum_system_requirements!
+                                                            .os
+                                                    }
+                                                </Td>
+                                            </Tr>
+                                            <Tr>
+                                                <Th width='40%'>Процессор</Th>
+                                                <Td>
+                                                    {
+                                                        details!
+                                                            .minimum_system_requirements!
+                                                            .processor
+                                                    }
+                                                </Td>
+                                            </Tr>
+                                            <Tr>
+                                                <Th width='40%'>Память</Th>
+                                                <Td>
+                                                    {
+                                                        details!
+                                                            .minimum_system_requirements!
+                                                            .memory
+                                                    }
+                                                </Td>
+                                            </Tr>
+                                            <Tr>
+                                                <Th width='40%'>Видеокарта</Th>
+                                                <Td>
+                                                    {
+                                                        details!
+                                                            .minimum_system_requirements!
+                                                            .graphics
+                                                    }
+                                                </Td>
+                                            </Tr>
+                                            <Tr>
+                                                <Th width='40%'>
+                                                    Место на диске
+                                                </Th>
+                                                <Td>
+                                                    {
+                                                        details!
+                                                            .minimum_system_requirements!
+                                                            .storage
+                                                    }
+                                                </Td>
+                                            </Tr>
+                                        </Tbody>
+                                    </Table>
+                                </section>
+                            )}
                             <section>
                                 <Heading
                                     as='h2'
