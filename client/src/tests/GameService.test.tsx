@@ -3,6 +3,14 @@ import { gameAPI } from '../services/GameService';
 import { ReduxProvider } from '../providers/Redux.provider';
 import { Platforms } from '../const/platforms';
 import { Genres } from '../const/genres';
+import { setupServer } from 'msw/node';
+import { handlers } from './mocks';
+
+const server = setupServer(...handlers);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 describe('gameAPI', () => {
     test('fetchGames endpoint returns data. Status: 200, response type: TGame[]', async () => {
@@ -105,45 +113,46 @@ describe('gameAPI', () => {
     });
 
     test('fetchGameDetails endpoint returns data. Status: 200, response type: TGame', async () => {
-        const Game421Details = {
-            id: 421,
-            title: 'Therian Saga',
-            thumbnail: 'https://www.freetogame.com/g/421/thumbnail.jpg',
+        const Game540Details = {
+            id: 540,
+            title: 'Overwatch 2',
+            thumbnail: 'https://www.freetogame.com/g/540/thumbnail.jpg',
             status: 'Live',
             short_description:
-                'A browser-based sandbox MMORPG with a complex crafting system.',
+                'A hero-focused first-person team shooter from Blizzard Entertainment.',
             description:
-                'Therian Saga is a free to play browser-based sandbox MMORPG with strategy elements where players create a unique character to explore, hunt, train, and craft.\r\n\r\nTherian Saga is not your typical role-playing game, this browser MMORPG, published by Gameforge AG, offers turn-based combat, a complex crafting system, a task-based queue system and Dungeons and Dragons-inspired dungeon crawling. Though the game has a low player based and can sometimes be slow-paced, one of the game’s redeeming qualities is its detailed customization. Players can choose from a myriad of skills and various aesthetic choices to contrive their own unique character to progress through the game with.\r\n\r\nAdditionally, players can queue up certain tasks for their avatar, which they will complete over time to meet the requirements of various game objectives.',
-            game_url: 'https://www.freetogame.com/open/therian-saga',
-            genre: 'MMORPG',
-            platform: 'Windows, Web Browser',
-            publisher: 'Gameforge',
-            developer: 'Virtys',
-            release_date: '2017-03-27',
-            freetogame_profile_url: 'https://www.freetogame.com/therian-saga',
+                'The tale of the hero organization Overwatch continues in Overwatch 2. This new take on the popular team shooter changes up things a little with five-man teams, redefined classes, and new playable characters. With the adjustment to 5v5, players now have more individual impact than in the previous game.\r\n\r\nChallenge yourself in all-new modes. Take control of a robot with your team in Push and take it to the enemy base before the enemy can take it from you. Explore all new areas, including iconic real-world cities such as New York, Rome, Monte Carlo, Toronto, and more.\r\n\r\nOverwatch 2 features an update schedule that drops new content every nine weeks. It also boasts a regular battle pass – both free and premium. This is where some of the game’s characters will be obtained.',
+            game_url: 'https://www.freetogame.com/open/overwatch-2',
+            genre: 'Shooter',
+            platform: 'Windows',
+            publisher: 'Activision Blizzard',
+            developer: 'Blizzard Entertainment',
+            release_date: '2022-10-04',
+            freetogame_profile_url: 'https://www.freetogame.com/overwatch-2',
             minimum_system_requirements: {
-                os: null,
-                processor: null,
-                memory: null,
-                graphics: null,
-                storage: null,
+                os: 'Windows 10 64-bit',
+                processor: 'Intel Core i3 or AMD Phenom X3 8650',
+                memory: '6 GB',
+                graphics:
+                    'NVIDIA GeForce GTX 600 series or AMD Radeon HD 7000 series',
+                storage: '50 GB',
             },
             screenshots: [
                 {
-                    id: 1033,
-                    image: 'https://www.freetogame.com/g/421/Therian-Saga-1.jpg',
+                    id: 1334,
+                    image: 'https://www.freetogame.com/g/540/overwatch-2-1.jpg',
                 },
                 {
-                    id: 1034,
-                    image: 'https://www.freetogame.com/g/421/Therian-Saga-2.jpg',
+                    id: 1335,
+                    image: 'https://www.freetogame.com/g/540/overwatch-2-2.jpg',
                 },
                 {
-                    id: 1035,
-                    image: 'https://www.freetogame.com/g/421/Therian-Saga-3.jpg',
+                    id: 1336,
+                    image: 'https://www.freetogame.com/g/540/overwatch-2-3.jpg',
                 },
             ],
         };
-        const gameId = '421';
+        const gameId = '540';
 
         const { result } = renderHook(
             () => gameAPI.endpoints.fetchGameDetails.useQuery({ id: gameId }),
@@ -158,7 +167,7 @@ describe('gameAPI', () => {
             await result.current.refetch();
         });
 
-        expect(result.current.data).toEqual(Game421Details);
+        expect(result.current.data).toEqual(Game540Details);
         expect(result.current.error).toBeUndefined();
     });
 
