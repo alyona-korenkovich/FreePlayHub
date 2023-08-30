@@ -6,14 +6,13 @@ import {
     FetchBaseQueryMeta,
     QueryDefinition,
 } from '@reduxjs/toolkit/query';
-import { TFetchGamesParams } from './TFetchGamesParams';
 import { RetryOptions } from '@reduxjs/toolkit/dist/query/retry';
 import { TGame } from './TGame';
 import { TNoResults } from './TNoResults';
 
 export type TQueryActionCreatorResult = QueryActionCreatorResult<
     QueryDefinition<
-        TFetchGamesParams,
+        unknown,
         BaseQueryFn<
             string | FetchArgs,
             unknown,
@@ -22,7 +21,7 @@ export type TQueryActionCreatorResult = QueryActionCreatorResult<
             FetchBaseQueryMeta
         >,
         never,
-        TGame[] | TNoResults,
+        TGame | TGame[] | TNoResults,
         'gameAPI'
     >
 >;
