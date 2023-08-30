@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { API_URL } from '../config/const';
 
 // 200
-const allGames = [
+export const allGames = [
     {
         id: 540,
         title: 'Overwatch 2',
@@ -232,7 +232,7 @@ export const handlers = [
                 return res(ctx.status(201), ctx.json(noGamesFound));
             else return res(ctx.status(200), ctx.json(browserGames));
     }),
-    rest.get(API_URL + '/games', (req, res, ctx) => {
+    rest.get(API_URL + '/game', (req, res, ctx) => {
         const id = req.url.searchParams.get('id');
         if (id === '540') return res(ctx.status(200), ctx.json(game540));
 
