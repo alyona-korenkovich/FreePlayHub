@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { gameAPI } from '../../services/GameService';
 import { CACHE_INVALIDATION_TIME_IN_MS } from '../../config/const';
 import GameDetails from '../../components/GameDetails/GameDetails';
 import { TGameDetails } from '../../types/TGameDetails';
+import { TQueryActionCreatorResult } from '../../types/TQueryActionCreatorResult';
 
 const GamePage = () => {
     const gameID = useParams().id || '0';
@@ -20,14 +21,30 @@ const GamePage = () => {
         localStorage.removeItem(cachedGameLocalStorageKey);
     }
 
-    const {
-        data: details,
-        error,
-        isLoading,
-    } = gameAPI.useFetchGameDetailsQuery(
-        { id: gameID! },
-        { skip: cacheIsValid },
-    );
+    const [currentPromise, setCurrentPromise] =
+        useState<TQueryActionCreatorResult | null>(null);
+
+    const [fetchGameDetails, { data: details, error, isLoading }] =
+        gameAPI.useLazyFetchGameDetailsQuery();
+
+    const abortCurrentPromise = () => {
+        if (currentPromise) {
+            currentPromise.abort();
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            abortCurrentPromise();
+        };
+    }, [currentPromise]);
+
+    useEffect(() => {
+        if (!cacheIsValid) {
+            const promise = fetchGameDetails({ id: gameID! });
+            setCurrentPromise(promise);
+        }
+    }, [gameID]);
 
     useEffect(() => {
         if (details) {
