@@ -1,11 +1,11 @@
 import {Controller, Get, InternalServerErrorException, NotFoundException, Query} from '@nestjs/common';
 import {GameService} from './game.service';
 
-@Controller('game')
+@Controller('games')
 export class GameController {
   constructor(private readonly gameService: GameService) {}
 
-  @Get('/')
+  @Get()
   async findAll(
       @Query('platform') platform?: string,
       @Query('category') category?: string,
@@ -24,7 +24,7 @@ export class GameController {
     }
   }
 
-  @Get(':id')
+  @Get('game/:id')
   async findOne(@Query('id') id: string) {
     return await this.gameService.findOne(+id);
   }
