@@ -11,9 +11,9 @@
     A clone of the FreeToGame free games store, completed as a test task for the Avito 2023 internship
     <br />
     <br />
-    <a href="https://alyona-korenkovich.github.io/FreePlayHub">Live demo</a>
-    ·
     <a href="https://github.com/avito-tech/frontend-trainee-assignment-2023">Project requirements</a>
+    ·
+    <a href="#getting-started">Getting started</a>
     ·
     <a href="https://alyona-korenkovich.github.io/FreePlayHub">Showcase</a>
     ·
@@ -40,6 +40,7 @@
     <li><a href="#showcase">Showcase</a></li>
     <li><a href="#getting-started">Getting started</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#remarks">Remarks</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -96,8 +97,7 @@ Also, the application implements caching of downloaded data with a lifetime of 5
 * ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 * ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
 * ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-* ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
-* ![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)
+* ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -111,8 +111,6 @@ See how pages look on desktop/mobile:
 <img src="img/showcase_desktop_game_page.png" alt="Desktop mockup with page view (page has basic information about the game)">
 <img src="img/showcase_mobile_list_and_gamepage.png" alt="IPhone mockup with games list view and game page view (list view has filters by platform & category and sorters, page has basic information about the game)">
 <img src="img/showcase_mobile_screenshot_gallery.png" alt="IPhone mockup with game page view (gallery of screenshots showcase)">
-
-.. or test it yourself on <a href="https://alyona-korenkovich.github.io/FreePlayHub">live demo</a>!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -198,7 +196,30 @@ It is needed to
 
 👀 See the [issues](https://github.com/alyona-korenkovich/FreePlayHub/issues) for a full list with more details.
 
-😉 Also, you may be interested in seeing [pull requests](https://github.com/alyona-korenkovich/FreePlayHub/pulls?q=is%3Apr+is%3Aclosed) for some details on realization of some features.
+😉 Also, you may be interested in seeing [pull requests](https://github.com/alyona-korenkovich/FreePlayHub/pulls?q=is%3Apr+is%3Aclosed) for detailed progress of work on features.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- REMARKS -->
+
+## Remarks
+> 🟣 <b>Infinite scroll</b>
+> 
+> Since the given API doesn't handle `limit` parameter, I didn't found a way to make a <i>real</i> infinite scroll. 
+> In fact, I fetch all the games all at once and <i>only render</i> them ten-by-ten. 
+ 
+> 🟣 <b>Filtration and sorting</b>
+>
+> This feature was implemented using the given API endpoints. 
+> Therefore, the implementation of the filtering and sorting itself remains on their conscience.
+> What I noticed is incorrect sorting by release date.
+> These shortcomings, if necessary, are simply neutralized if one independently implements sorting and filtering using standard array methods like `Array.filter()` and `Array.sort()` with appropriate callbacks passed into them.
+
+> 🟣 <b>Caching game pages with TTL = 5 min</b>
+>
+> I initially created `redux slice` for this, but then I noticed that the requirements included “reloading the page”, which meant that Redux would not serve the purpose in this case.
+> Next, I came up with the idea of using `sessionStorage` to store this data while the session (tab) is active, but then I thought, '<i>what if it was meant that a person could open and close a tab in those 5 minutes and game page should also be loaded from the cache</i>', so I left `localStorage`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
