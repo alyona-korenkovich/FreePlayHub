@@ -11,11 +11,11 @@
     A clone of the FreeToGame free games store, completed as a test task for the Avito 2023 internship
     <br />
     <br />
-    <a href="https://alyona-korenkovich.github.io/FreePlayHub">Live demo</a>
-    ·
     <a href="https://github.com/avito-tech/frontend-trainee-assignment-2023">Project requirements</a>
     ·
-    <a href="https://alyona-korenkovich.github.io/FreePlayHub">Showcase</a>
+    <a href="#getting-started">Getting started</a>
+    ·
+    <a href="#showcase">Showcase</a>
     ·
     <a href="https://github.com/alyona-korenkovich/FreePlayHub/issues?q=is%3Aissue+is%3Aclosed">Issues</a>
   </p>
@@ -40,6 +40,7 @@
     <li><a href="#showcase">Showcase</a></li>
     <li><a href="#getting-started">Getting started</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#remarks">Remarks</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -65,7 +66,7 @@ Games can also be sorted by release date, popularity, and more.
 
 🎮 <b>Game Detail Page</b>
 
-Clicking on a game takes the user to a detailed page where detailed information about the game is available, such as title, release date, publisher, developer, genre, image, screenshots, and system requirements.
+Clicking on a game takes the user to a game page where detailed information about the game is available, such as title, release date, publisher, developer, genre, image, screenshots, and system requirements.
 
 ⚙ <b>User-friendly interface</b>
 
@@ -96,8 +97,7 @@ Also, the application implements caching of downloaded data with a lifetime of 5
 * ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 * ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
 * ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-* ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
-* ![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)
+* ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -111,8 +111,6 @@ See how pages look on desktop/mobile:
 <img src="img/showcase_desktop_game_page.png" alt="Desktop mockup with page view (page has basic information about the game)">
 <img src="img/showcase_mobile_list_and_gamepage.png" alt="IPhone mockup with games list view and game page view (list view has filters by platform & category and sorters, page has basic information about the game)">
 <img src="img/showcase_mobile_screenshot_gallery.png" alt="IPhone mockup with game page view (gallery of screenshots showcase)">
-
-.. or test it yourself on <a href="https://alyona-korenkovich.github.io/FreePlayHub">live demo</a>!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -132,7 +130,9 @@ See how pages look on desktop/mobile:
 ### ReactJS + NestJS (no Docker)
 1. Clone the project
 `git clone https://github.com/alyona-korenkovich/FreePlayHub`
-2. Touch and edit `.env` file
+2. Go to the project root
+3. Touch and edit `.env` file
+
 Create `.env` file and add the following variables:
   ```bash
   PORT_SERVER=5000
@@ -140,14 +140,12 @@ Create `.env` file and add the following variables:
 ```
 3. Go to the client directory `cd client`
 4. Touch and edit `.env` file
+
 Create `.env` file and add the following variables:
   ```bash
   PORT=3001
   REACT_APP_API_URL=http://localhost:5000/games
   ```
-It is needed to
-* access site on `localhost:3001`
-* access API endpoints
 
 4. Start client `npm start`
 5. Go to the server directory `cd ../server`
@@ -179,13 +177,13 @@ It is needed to
 - 🌟 First release and deployment to GitHub Pages 🌟
 ---
 - [x] #6 Endless Scroller
-  - Data lazy-loading and endless game list
+  - Data lazy-loading and infinite scroll
 - [x] #7 Try-3-Times requests
-  - If the request is unsuccessful, there must be three attempts to re-request
+  - If the request is unsuccessful, there must be three more attempts to re-request
 - [x] #8 Cancel Requests
   - Cancel outdated requests when redirecting pages
 - [x] #9 Testing
-  - Add unit tests
+  - Add unit and a11y tests
   - Add GitHub workflows and support GitHub Actions
 ---
 - 🌟 Second release 🌟
@@ -198,7 +196,30 @@ It is needed to
 
 👀 See the [issues](https://github.com/alyona-korenkovich/FreePlayHub/issues) for a full list with more details.
 
-😉 Also, you may be interested in seeing [pull requests](https://github.com/alyona-korenkovich/FreePlayHub/pulls?q=is%3Apr+is%3Aclosed) for some details on realization of some features.
+😉 Also, you may be interested in seeing [pull requests](https://github.com/alyona-korenkovich/FreePlayHub/pulls?q=is%3Apr+is%3Aclosed) for detailed progress of work on features.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- REMARKS -->
+
+## Remarks
+> 🟣 <b>Infinite scroll</b>
+> 
+> Since the given API doesn't handle `limit` parameter, I didn't found a way to make a <i>real</i> infinite scroll. 
+> In fact, I fetch all the games all at once and <i>only render</i> them ten-by-ten. 
+ 
+> 🟣 <b>Filtration and sorting</b>
+>
+> This feature was implemented using the given API endpoints. 
+> Therefore, the implementation of the filtering and sorting itself remains on their conscience.
+> What I noticed is incorrect sorting by release date.
+> These shortcomings, if necessary, are simply neutralized if one independently implements sorting and filtering using standard array methods like `Array.filter()` and `Array.sort()` with appropriate callbacks passed into them.
+
+> 🟣 <b>Caching game pages with TTL = 5 min</b>
+>
+> I initially created `redux slice` for this, but then I noticed that the requirements included “reloading the page”, which meant that Redux would not serve the purpose in this case.
+> Next, I came up with the idea of using `sessionStorage` to store this data while the session (tab) is active, but then I thought, '<i>what if it was meant that a person could open and close a tab in those 5 minutes and game page should also be loaded from the cache</i>', so I left `localStorage`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -228,7 +249,7 @@ Project Link: [github.com/alyona-korenkovich/FreePlayHub](https://github.com/aly
 
 Some helpful links:
 
-* [FreeToGame - original](www.freetogame.com)
+* [FreeToGame - original](https://www.freetogame.com)
 * [FreeToGame API](https://www.freetogame.com/api-doc)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
