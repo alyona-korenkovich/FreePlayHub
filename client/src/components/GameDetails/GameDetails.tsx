@@ -28,7 +28,7 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
             <main className={styles.game_container}>
                 {isLoading && <Loader />}
                 {error && (
-                    <>
+                    <div className={styles.game_error}>
                         <Button
                             width='100%'
                             leftIcon={<ArrowBackIcon />}
@@ -37,7 +37,7 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                             Назад к списку игр
                         </Button>
                         <Text color='red'>Произошла ошибка при загрузке</Text>
-                    </>
+                    </div>
                 )}
                 {details && (
                     <>
