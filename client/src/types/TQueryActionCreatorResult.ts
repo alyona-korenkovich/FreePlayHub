@@ -8,7 +8,6 @@ import {
 } from '@reduxjs/toolkit/query';
 import { RetryOptions } from '@reduxjs/toolkit/dist/query/retry';
 import { TGame } from './TGame';
-import { TNoResults } from './TNoResults';
 
 export type TQueryActionCreatorResult = QueryActionCreatorResult<
     QueryDefinition<
@@ -21,7 +20,7 @@ export type TQueryActionCreatorResult = QueryActionCreatorResult<
             FetchBaseQueryMeta
         >,
         never,
-        TGame | TGame[] | TNoResults,
+        TGame | TGame[],
         'gameAPI'
     >
 >;

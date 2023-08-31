@@ -4,7 +4,7 @@ import { ReduxProvider } from '../providers/Redux.provider';
 import { Platforms } from '../const/platforms';
 import { Genres } from '../const/genres';
 import { setupServer } from 'msw/node';
-import { handlers } from './mocks';
+import { browserMmotpsGames, handlers } from './mocks';
 
 const server = setupServer(...handlers);
 
@@ -14,53 +14,6 @@ afterAll(() => server.close());
 
 describe('gameAPI', () => {
     test('fetchGames endpoint returns data. Status: 200, response type: TGame[]', async () => {
-        const expectedGames = [
-            {
-                id: 118,
-                title: 'Starbreak',
-                thumbnail: 'https://www.freetogame.com/g/118/thumbnail.jpg',
-                short_description:
-                    'A Roguelike MMORPG with MetroidVania-style platformer \r\ngameplay! Castlevania and Metroid fans will \r\nlove this game! ',
-                game_url: 'https://www.freetogame.com/open/starbreak',
-                genre: 'MMORPG',
-                platform: 'PC (Windows), Web Browser',
-                publisher: 'Crunchy Games',
-                developer: 'Crunchy Games',
-                release_date: '2016-05-10',
-                freetogame_profile_url: 'https://www.freetogame.com/starbreak',
-            },
-            {
-                id: 405,
-                title: 'Pocket Starships',
-                thumbnail: 'https://www.freetogame.com/g/405/thumbnail.jpg',
-                short_description:
-                    'A free-to-play cross-platform space combat MMO from SPYR games.',
-                game_url: 'https://www.freetogame.com/open/pocket-starships',
-                genre: 'Strategy',
-                platform: 'Web Browser',
-                publisher: 'Spyr',
-                developer: 'Spyr',
-                release_date: '0000-00-00',
-                freetogame_profile_url:
-                    'https://www.freetogame.com/pocket-starships',
-            },
-            {
-                id: 256,
-                title: 'Realm of the Mad God',
-                thumbnail: 'https://www.freetogame.com/g/256/thumbnail.jpg',
-                short_description:
-                    'A fast paced 2d free to play MMO shooter game with a retro 8-bit style.',
-                game_url: 'https://www.freetogame.com/open/realm-mad-god',
-                genre: 'MMORPG',
-                platform: 'PC (Windows), Web Browser',
-                publisher: 'Kabam',
-                developer: 'Wild Shadow Studios',
-                release_date: '2012-02-21',
-                freetogame_profile_url:
-                    'https://www.freetogame.com/realm-mad-god',
-            },
-        ];
-
         const params = {
             platform: Platforms.browser,
             category: Genres.mmotps,
@@ -79,17 +32,11 @@ describe('gameAPI', () => {
             await result.current.refetch();
         });
 
-        expect(result.current.data).toEqual(expectedGames);
+        expect(result.current.data).toEqual(browserMmotpsGames);
         expect(result.current.error).toBeUndefined();
     });
 
-    test('fetchGames endpoint returns data. Status: 201, response type: TNoResult', async () => {
-        const noResult = {
-            status: 0,
-            status_message:
-                'No results available at the moment, please try again later.',
-        };
-
+    test('fetchGames endpoint handles errors', async () => {
         const params = {
             platform: Platforms.browser,
             category: Genres['tower-defense'],
@@ -108,8 +55,8 @@ describe('gameAPI', () => {
             await result.current.refetch();
         });
 
-        expect(result.current.data).toEqual(noResult);
-        expect(result.current.error).toBeUndefined();
+        expect(result.current.data).toBeUndefined();
+        expect(result.current.error).toBeDefined();
     });
 
     test('fetchGameDetails endpoint returns data. Status: 200, response type: TGame', async () => {
@@ -171,15 +118,7 @@ describe('gameAPI', () => {
         expect(result.current.error).toBeUndefined();
     });
 
-    test('fetchGameDetails endpoint handles errors. Status: 404, response type: TNoResults', async () => {
-        const noResult = {
-            data: {
-                status: 0,
-                status_message: 'No game found with that id',
-            },
-            status: 404,
-        };
-
+    test('fetchGameDetails endpoint handles errors', async () => {
         const gameId = '42591';
 
         const { result } = renderHook(
@@ -196,6 +135,6 @@ describe('gameAPI', () => {
         });
 
         expect(result.current.data).toBeUndefined();
-        expect(result.current.error).toEqual(noResult);
+        expect(result.current.error).toBeDefined();
     });
 });

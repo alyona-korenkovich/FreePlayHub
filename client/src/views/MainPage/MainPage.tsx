@@ -12,9 +12,8 @@ const MainPage = () => {
     const endOfListRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [visibleGamesCnt, setVisibleGamesCnt] = useState<number>(10);
     const [params, setParams] = useState<TFetchGamesParams>({});
-    const [noResults, setNoResults] = useState<boolean>(false);
 
-    const [fetchGames, { data: games, error, isLoading }] =
+    const [fetchGames, { data: games, error, isFetching }] =
         gameAPI.useLazyFetchGamesQuery();
 
     const handleScroll = useCallback(() => {
@@ -37,9 +36,13 @@ const MainPage = () => {
     };
 
     useEffect(() => {
+        if (error) setVisibleGamesCnt(0);
+    }, [error]);
+
+    useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [isLoading, handleScroll]);
+    }, [isFetching, handleScroll]);
 
     useEffect(() => {
         return () => {
@@ -54,18 +57,10 @@ const MainPage = () => {
         setCurrentPromise(promise);
     }, [params]);
 
-    useEffect(() => {
-        if (games && Array.isArray(games)) {
-            setNoResults(false);
-        } else if (games && typeof games === 'object' && games.status === 0) {
-            setNoResults(true);
-        }
-    }, [games]);
-
     const config: TGameList = {
-        isLoading: isLoading,
-        error: noResults || Boolean(error),
-        games: Array.isArray(games) ? games.slice(0, visibleGamesCnt) : [],
+        isLoading: isFetching,
+        error: error,
+        games: games ? games.slice(0, visibleGamesCnt) : [],
         setParams: setParams,
         endOfListRef: endOfListRef,
     };

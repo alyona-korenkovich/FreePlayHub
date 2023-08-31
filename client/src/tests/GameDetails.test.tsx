@@ -3,10 +3,11 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { TGameDetails } from '../types/TGameDetails';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query/react';
 
 const mockGameDetailsReady: TGameDetails = {
     isLoading: false,
-    error: false,
+    error: undefined,
     details: {
         id: 521,
         title: 'Diablo Immortal',
@@ -50,13 +51,16 @@ const mockGameDetailsReady: TGameDetails = {
 
 const mockGameDetailsLoading: TGameDetails = {
     isLoading: true,
-    error: false,
+    error: undefined,
     details: undefined,
 };
 
 const mockGameDetailsError = {
     isLoading: false,
-    error: true,
+    error: {
+        status: 404,
+        data: 'Not found',
+    } as FetchBaseQueryError,
     details: undefined,
 };
 
