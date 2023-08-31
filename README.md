@@ -183,7 +183,7 @@ It is needed to
 - [ ] #10 Requests encapsulation in Node
   - Setup server on Node.js and encapsulate API requests
 ---
-- 🌟 Third release and deployment to Heroku 🌟
+- 🌟 Third release 🌟
 ---
 
 👀 See the [issues](https://github.com/alyona-korenkovich/FreePlayHub/issues) for a full list with more details.
