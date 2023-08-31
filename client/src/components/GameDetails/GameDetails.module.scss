@@ -35,6 +35,14 @@ section {
   align-self: stretch;
 }
 
+.game_error {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  text-align: center;
+  flex-direction: column;
+}
+
 @media (max-width: 800px) {
   .game_container {
     padding: 8px;
