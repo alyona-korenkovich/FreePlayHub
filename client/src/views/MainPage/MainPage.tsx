@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import GameList from '../../components/GameList/GameList';
 import { TGameList } from '../../types/TGameList';
-import { TGame } from '../../types/TGame';
 import { TFetchGamesParams } from '../../types/TFetchGamesParams';
 import { GAMES_PER_PAGE } from '../../config/const';
 import { gameAPI } from '../../services/GameService';
@@ -11,25 +10,25 @@ const MainPage = () => {
     const [currentPromise, setCurrentPromise] =
         useState<TQueryActionCreatorResult | null>(null);
     const endOfListRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const [visibleGames, setVisibleGames] = useState<TGame[]>([]);
+    const [visibleGamesCnt, setVisibleGamesCnt] = useState<number>(10);
     const [params, setParams] = useState<TFetchGamesParams>({});
     const [noResults, setNoResults] = useState<boolean>(false);
 
     const [fetchGames, { data: games, error, isLoading }] =
         gameAPI.useLazyFetchGamesQuery();
 
-    const expandGameList = () => {
-        if (games && Array.isArray(games)) {
-            setVisibleGames((prevState) => {
-                const newGamesToLoad = games.slice(
-                    prevState.length,
-                    prevState.length + GAMES_PER_PAGE,
-                );
-                const updatedState = prevState.concat(newGamesToLoad);
-                return updatedState;
-            });
+    const handleScroll = useCallback(() => {
+        if (
+            endOfListRef.current &&
+            window.innerHeight + window.scrollY >=
+                endOfListRef.current.offsetTop +
+                    endOfListRef.current.offsetHeight
+        ) {
+            setVisibleGamesCnt(
+                (prevVisibleGamesCnt) => prevVisibleGamesCnt + GAMES_PER_PAGE,
+            );
         }
-    };
+    }, []);
 
     const abortCurrentPromise = () => {
         if (currentPromise) {
@@ -37,20 +36,10 @@ const MainPage = () => {
         }
     };
 
-    const handleScroll = () => {
-        if (
-            endOfListRef.current &&
-            window.innerHeight + window.scrollY >=
-                endOfListRef.current.offsetTop
-        ) {
-            expandGameList();
-        }
-    };
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [isLoading]);
+    }, [isLoading, handleScroll]);
 
     useEffect(() => {
         return () => {
@@ -59,8 +48,6 @@ const MainPage = () => {
     }, [currentPromise]);
 
     useEffect(() => {
-        setVisibleGames([]);
-
         abortCurrentPromise();
 
         const promise = fetchGames(params);
@@ -69,7 +56,6 @@ const MainPage = () => {
 
     useEffect(() => {
         if (games && Array.isArray(games)) {
-            expandGameList();
             setNoResults(false);
         } else if (games && typeof games === 'object' && games.status === 0) {
             setNoResults(true);
@@ -79,7 +65,7 @@ const MainPage = () => {
     const config: TGameList = {
         isLoading: isLoading,
         error: noResults || Boolean(error),
-        games: visibleGames,
+        games: Array.isArray(games) ? games.slice(0, visibleGamesCnt) : [],
         setParams: setParams,
         endOfListRef: endOfListRef,
     };
