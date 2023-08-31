@@ -1,4 +1,4 @@
-import {Controller, Get, InternalServerErrorException, NotFoundException, Query} from '@nestjs/common';
+import {Controller, Get, Query} from '@nestjs/common';
 import {GameService} from './game.service';
 
 @Controller('games')
@@ -24,7 +24,7 @@ export class GameController {
     }
   }
 
-  @Get('game/:id')
+  @Get('game')
   async findOne(@Query('id') id: string) {
     return await this.gameService.findOne(+id);
   }
