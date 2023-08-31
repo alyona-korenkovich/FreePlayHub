@@ -15,7 +15,7 @@
     ·
     <a href="#getting-started">Getting started</a>
     ·
-    <a href="https://alyona-korenkovich.github.io/FreePlayHub">Showcase</a>
+    <a href="#showcase">Showcase</a>
     ·
     <a href="https://github.com/alyona-korenkovich/FreePlayHub/issues?q=is%3Aissue+is%3Aclosed">Issues</a>
   </p>
@@ -66,7 +66,7 @@ Games can also be sorted by release date, popularity, and more.
 
 🎮 <b>Game Detail Page</b>
 
-Clicking on a game takes the user to a detailed page where detailed information about the game is available, such as title, release date, publisher, developer, genre, image, screenshots, and system requirements.
+Clicking on a game takes the user to a game page where detailed information about the game is available, such as title, release date, publisher, developer, genre, image, screenshots, and system requirements.
 
 ⚙ <b>User-friendly interface</b>
 
@@ -130,7 +130,9 @@ See how pages look on desktop/mobile:
 ### ReactJS + NestJS (no Docker)
 1. Clone the project
 `git clone https://github.com/alyona-korenkovich/FreePlayHub`
-2. Touch and edit `.env` file
+2. Go to the project root
+3. Touch and edit `.env` file
+
 Create `.env` file and add the following variables:
   ```bash
   PORT_SERVER=5000
@@ -138,14 +140,12 @@ Create `.env` file and add the following variables:
 ```
 3. Go to the client directory `cd client`
 4. Touch and edit `.env` file
+
 Create `.env` file and add the following variables:
   ```bash
   PORT=3001
   REACT_APP_API_URL=http://localhost:5000/games
   ```
-It is needed to
-* access site on `localhost:3001`
-* access API endpoints
 
 4. Start client `npm start`
 5. Go to the server directory `cd ../server`
@@ -177,13 +177,13 @@ It is needed to
 - 🌟 First release and deployment to GitHub Pages 🌟
 ---
 - [x] #6 Endless Scroller
-  - Data lazy-loading and endless game list
+  - Data lazy-loading and infinite scroll
 - [x] #7 Try-3-Times requests
-  - If the request is unsuccessful, there must be three attempts to re-request
+  - If the request is unsuccessful, there must be three more attempts to re-request
 - [x] #8 Cancel Requests
   - Cancel outdated requests when redirecting pages
 - [x] #9 Testing
-  - Add unit tests
+  - Add unit and a11y tests
   - Add GitHub workflows and support GitHub Actions
 ---
 - 🌟 Second release 🌟
@@ -249,7 +249,7 @@ Project Link: [github.com/alyona-korenkovich/FreePlayHub](https://github.com/aly
 
 Some helpful links:
 
-* [FreeToGame - original](www.freetogame.com)
+* [FreeToGame - original](https://www.freetogame.com)
 * [FreeToGame API](https://www.freetogame.com/api-doc)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
