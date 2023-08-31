@@ -19,7 +19,7 @@ export const gameAPI = createApi({
     endpoints: (build) => ({
         fetchGames: build.query<TGame[] | TNoResults, TFetchGamesParams>({
             query: (params: TFetchGamesParams) => ({
-                url: '/games',
+                url: '/',
                 params: params,
                 headers: {
                     'X-RapidAPI-Key': process.env.REACT_APP_X_RAPIDAPI_KEY,
