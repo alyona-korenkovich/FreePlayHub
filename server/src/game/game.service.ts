@@ -1,6 +1,10 @@
-import {Injectable, NotFoundException, ServiceUnavailableException} from '@nestjs/common';
-import { API_URL } from "./const/const";
-import axios, { AxiosRequestConfig } from "axios";
+import {
+  Injectable,
+  NotFoundException,
+  ServiceUnavailableException,
+} from '@nestjs/common';
+import { API_URL } from './const/const';
+import axios, { AxiosRequestConfig } from 'axios';
 
 @Injectable()
 export class GameService {
@@ -11,8 +15,7 @@ export class GameService {
       params,
       headers: {
         'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-        'X-RapidAPI-Host':
-            'free-to-play-games-database.p.rapidapi.com',
+        'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
       },
     };
 
@@ -24,7 +27,10 @@ export class GameService {
       return response.data;
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
-      else throw new ServiceUnavailableException('Произошла ошибка при получении данных');
+      else
+        throw new ServiceUnavailableException(
+          'Произошла ошибка при получении данных',
+        );
     }
   }
 
@@ -37,17 +43,20 @@ export class GameService {
       },
       headers: {
         'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-        'X-RapidAPI-Host':
-            'free-to-play-games-database.p.rapidapi.com',
+        'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
       },
-    }
+    };
 
     try {
       const response = await axios(axiosConfig);
       return response.data;
     } catch (error) {
-      if (error.request.res.statusCode === 404) throw new NotFoundException('Игра с таким ID не найдена');
-      else throw new ServiceUnavailableException('Произошла ошибка при получении данных');
+      if (error.request.res.statusCode === 404)
+        throw new NotFoundException('Игра с таким ID не найдена');
+      else
+        throw new ServiceUnavailableException(
+          'Произошла ошибка при получении данных',
+        );
     }
   }
 }

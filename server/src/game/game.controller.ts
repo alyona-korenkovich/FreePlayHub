@@ -1,5 +1,5 @@
-import {Controller, Get, Query} from '@nestjs/common';
-import {GameService} from './game.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import { GameService } from './game.service';
 
 @Controller('games')
 export class GameController {
@@ -7,9 +7,9 @@ export class GameController {
 
   @Get()
   async findAll(
-      @Query('platform') platform?: string,
-      @Query('category') category?: string,
-      @Query('sort-by') sortBy?: string,
+    @Query('platform') platform?: string,
+    @Query('category') category?: string,
+    @Query('sort-by') sortBy?: string,
   ) {
     const params: Record<string, string> = {};
 
