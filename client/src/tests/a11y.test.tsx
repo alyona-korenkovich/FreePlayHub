@@ -37,7 +37,7 @@ describe('a11y tests for components', () => {
     test('GameDetails component has no accessibility violations', async () => {
         const mockGameDetails: TGameDetails = {
             isLoading: false,
-            error: false,
+            error: undefined,
             details: {
                 id: 521,
                 title: 'Diablo Immortal',
@@ -123,7 +123,7 @@ describe('a11y tests for components', () => {
     test('GameList has no accessibility violations', async () => {
         const mockedGameListReady: TGameList = {
             isLoading: false,
-            error: false,
+            error: undefined,
             games: allGames,
             setParams: () => {},
             endOfListRef: undefined,

@@ -5,6 +5,7 @@ import GameList from '../components/GameList/GameList';
 import { MemoryRouter } from 'react-router-dom';
 import { TGameList } from '../types/TGameList';
 import { allGames } from './mocks';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query/react';
 
 const mockUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -14,7 +15,7 @@ jest.mock('react-router-dom', () => ({
 
 const mockedGameListReady: TGameList = {
     isLoading: false,
-    error: false,
+    error: undefined,
     games: allGames,
     setParams: () => {},
     endOfListRef: undefined,
@@ -22,7 +23,7 @@ const mockedGameListReady: TGameList = {
 
 const mockedGameListLoading: TGameList = {
     isLoading: true,
-    error: false,
+    error: undefined,
     games: undefined,
     setParams: () => {},
     endOfListRef: undefined,
@@ -30,7 +31,10 @@ const mockedGameListLoading: TGameList = {
 
 const mockedGameListError: TGameList = {
     isLoading: false,
-    error: true,
+    error: {
+        status: 404,
+        data: 'Not found',
+    } as FetchBaseQueryError,
     games: undefined,
     setParams: () => {},
     endOfListRef: undefined,

@@ -24,7 +24,7 @@ const GamePage = () => {
     const [currentPromise, setCurrentPromise] =
         useState<TQueryActionCreatorResult | null>(null);
 
-    const [fetchGameDetails, { data: details, error, isLoading }] =
+    const [fetchGameDetails, { data: details, error, isFetching }] =
         gameAPI.useLazyFetchGameDetailsQuery();
 
     const abortCurrentPromise = () => {
@@ -59,8 +59,8 @@ const GamePage = () => {
     }, [details, cachedGameLocalStorageKey]);
 
     const config: TGameDetails = {
-        isLoading: cacheIsValid ? false : isLoading,
-        error: Boolean(error),
+        isLoading: cacheIsValid ? false : isFetching,
+        error: error,
         details: cacheIsValid ? cachedGame.gameDetails : details,
     };
 

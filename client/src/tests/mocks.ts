@@ -120,7 +120,7 @@ const browserGames = [
             'https://www.freetogame.com/game-of-thrones-winter-is-coming',
     },
 ];
-const browserMmotpsGames = [
+export const browserMmotpsGames = [
     {
         id: 118,
         title: 'Starbreak',
@@ -164,7 +164,7 @@ const browserMmotpsGames = [
         freetogame_profile_url: 'https://www.freetogame.com/realm-mad-god',
     },
 ];
-// 201
+// 404
 const noGamesFound = {
     status: 0,
     status_message:
@@ -229,7 +229,7 @@ export const handlers = [
             if (category === 'mmotps')
                 return res(ctx.status(200), ctx.json(browserMmotpsGames));
             else if (category === 'tower-defense')
-                return res(ctx.status(201), ctx.json(noGamesFound));
+                return res(ctx.status(404), ctx.json(noGamesFound));
             else return res(ctx.status(200), ctx.json(browserGames));
     }),
     rest.get(API_URL + '/game', (req, res, ctx) => {

@@ -39,7 +39,7 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                         <Text color='red'>Произошла ошибка при загрузке</Text>
                     </div>
                 )}
-                {details && (
+                {details! && (
                     <>
                         <aside className={styles.side_panel}>
                             <Heading
@@ -101,7 +101,7 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                                     </Tbody>
                                 </Table>
                             </section>
-                            {details!.minimum_system_requirements && (
+                            {details!.minimum_system_requirements! && (
                                 <section>
                                     <Heading
                                         as='h2'
@@ -171,19 +171,22 @@ const GameDetails = ({ isLoading, error, details }: TGameDetails) => {
                                     </Table>
                                 </section>
                             )}
-                            <section>
-                                <Heading
-                                    as='h2'
-                                    fontFamily='Poppins, sans-serif'
-                                    fontSize='24px'
-                                    fontWeight='600'
-                                >
-                                    Галерея скриншотов
-                                </Heading>
-                                <ScreenshotCarousel
-                                    screenshots={details.screenshots!}
-                                />
-                            </section>
+                            {details.screenshots! &&
+                                !!details.screenshots!.length && (
+                                    <section>
+                                        <Heading
+                                            as='h2'
+                                            fontFamily='Poppins, sans-serif'
+                                            fontSize='24px'
+                                            fontWeight='600'
+                                        >
+                                            Галерея скриншотов
+                                        </Heading>
+                                        <ScreenshotCarousel
+                                            screenshots={details.screenshots!}
+                                        />
+                                    </section>
+                                )}
                         </section>
                     </>
                 )}

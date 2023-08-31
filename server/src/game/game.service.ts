@@ -21,7 +21,7 @@ export class GameService {
 
     try {
       const response = await axios(axiosConfig);
-      if (response.data.status && response.data.status === 0) {
+      if (response.data.status === 0) {
         throw new NotFoundException('Игры по данному запросу не найдены');
       }
       return response.data;
