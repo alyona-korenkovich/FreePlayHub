@@ -1,0 +1,23 @@
+version: '1'
+
+services:
+  freeplayhub_server:
+    container_name: freeplayhub_server
+    build:
+      context: ./server
+    environment:
+      - PORT_SERVER=5000
+      - X_RAPIDAPI_KEY=e9847a112amsha6daa9416ea8662p1adc7ajsn3d0cb03c40fb
+    ports:
+      - 5000:5000
+    restart: always
+  freeplayhub_client:
+    container_name: freeplayhub_client
+    build:
+      context: ./client
+    ports:
+      - 3001:3001
+    restart: always
+    environment:
+      - PORT=3001
+      - REACT_APP_API_URL='http://localhost:5000/games'
