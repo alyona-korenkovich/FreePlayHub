@@ -119,30 +119,40 @@ See how pages look on desktop/mobile:
 <!--GETTING STARTED -->
 ## Getting started
 
+### ReactJS + NestJS (Docker)
 
-### Clone the project
+1. Clone the project
+   `git clone https://github.com/alyona-korenkovich/FreePlayHub`
+2. Install and run Docker
+3. Go to the project's root
+4. Run `docker compose up`
+5. Open `localhost:3001` on your browser
+   ...and enjoy FreePlayHub!
+
+### ReactJS + NestJS (no Docker)
+1. Clone the project
 `git clone https://github.com/alyona-korenkovich/FreePlayHub`
-
-### Go to the client directory
-`cd client`
-
-### Touch and edit `.env` file
-Create in `<root>/client` directory `.env` file and add the following variables:
-
-```bash
-PORT=3001
-REACT_APP_X_RAPIDAPI_KEY=e9847a112amsha6daa9416ea8662p1adc7ajsn3d0cb03c40fb
+2. Touch and edit `.env` file
+Create `.env` file and add the following variables:
+  ```bash
+  PORT_SERVER=5000
+  X_RAPIDAPI_KEY=e9847a112amsha6daa9416ea8662p1adc7ajsn3d0cb03c40fb
 ```
-
+3. Go to the client directory `cd client`
+4. Touch and edit `.env` file
+Create `.env` file and add the following variables:
+  ```bash
+  PORT=3001
+  REACT_APP_API_URL=http://localhost:5000/games
+  ```
 It is needed to
 * access site on `localhost:3001`
-* access FreeToGame API endpoints
+* access API endpoints
 
-### Start development server
-
-`npm start`
-
-### Open `localhost:3001` on your browser
+4. Start client `npm start`
+5. Go to the server directory `cd ../server`
+6. Start server `npm start`
+7. Open `localhost:3001` on your browser
 ...and enjoy FreePlayHub!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -180,7 +190,7 @@ It is needed to
 ---
 - 🌟 Second release 🌟
 ---
-- [ ] #10 Requests encapsulation in Node
+- [x] #10 Requests encapsulation in Node
   - Setup server on Node.js and encapsulate API requests
 ---
 - 🌟 Third release 🌟
