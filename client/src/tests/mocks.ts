@@ -217,7 +217,7 @@ const noGameFound = {
 };
 
 export const handlers = [
-    rest.get(API_URL + '/games', (req, res, ctx) => {
+    rest.get(API_URL, (req, res, ctx) => {
         const platform = req.url.searchParams.get('platform');
         const category = req.url.searchParams.get('category');
         const sortedBy = req.url.searchParams.get('sorted-by');
